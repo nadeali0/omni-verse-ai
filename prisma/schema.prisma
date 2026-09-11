@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String        @id @default(cuid())
+  email           String        @unique
+  name            String?
+  image           String?
+  apiKeys         Json?
+  credits         Int           @default(100)
+  subscription    String        @default("FREE") // FREE, PRO, UNLIMITED
+  stripeId        String?
+  generations     Generation[]
+  files           File[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Generation {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type            String        // chat, image, video, avatar, voice, code
+  prompt          String
+  result          String?
+  model           String
+  creditsUsed     Int           @default(1)
+  createdAt       DateTime      @default(now())
+}
+
+model File {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fileName        String
+  fileUrl         String
+  fileType        String        // pdf, docx, xlsx, pptx
+  fileSize        Int
+  createdAt       DateTime      @default(now())
+}
