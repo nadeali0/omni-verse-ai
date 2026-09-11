@@ -1,0 +1,13 @@
+[tool.black]
+line-length = 100
+
+[tool.prettier]
+semi = true
+singleQuote = true
+tabWidth = 2
+trailingComma = "all"
+printWidth = 100
+
+[build-system]
+requires = ["setuptools>=40.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
