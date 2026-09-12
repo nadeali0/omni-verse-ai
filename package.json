@@ -28,7 +28,6 @@
     "tailwindcss-animate": "^1.0.7",
     "postcss": "^8.4.32",
     "autoprefixer": "^10.4.17",
-    "@shadcn/ui": "^0.8.0",
     "framer-motion": "^10.16.19",
     "@supabase/supabase-js": "^2.39.3",
     "@prisma/client": "^5.8.0",
